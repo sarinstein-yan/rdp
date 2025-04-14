@@ -1,6 +1,9 @@
 Ramer-Douglas-Peucker Algorithm
 -------------------------------
 
+WARNING: THIS PROJECT IS NO LONGER MAINTAINED.
+
+
 .. image:: https://travis-ci.org/fhirschmann/rdp.png?branch=master
    :target: https://travis-ci.org/fhirschmann/rdp
 
