@@ -12,11 +12,13 @@ from math import sqrt
 from functools import partial
 import numpy as np
 import sys
+from numba import njit
 
 if sys.version_info[0] >= 3:
     xrange = range
 
 
+@njit
 def pldist(point, start, end):
     """
     Calculates the distance from ``point`` to the line given
@@ -37,6 +39,7 @@ def pldist(point, start, end):
             np.linalg.norm(end - start))
 
 
+@njit
 def rdp_rec(M, epsilon, dist=pldist):
     """
     Simplifies a given array of points.
@@ -69,11 +72,13 @@ def rdp_rec(M, epsilon, dist=pldist):
         return np.vstack((M[0], M[-1]))
 
 
+@njit
 def _rdp_iter(M, start_index, last_index, epsilon, dist=pldist):
     stk = []
     stk.append([start_index, last_index])
     global_start_index = start_index
-    indices = np.ones(last_index - start_index + 1, dtype=bool)
+    # indices = np.ones(last_index - start_index + 1, dtype=bool)
+    indices = [True] * (last_index - start_index + 1)
 
     while stk:
         start_index, last_index = stk.pop()
